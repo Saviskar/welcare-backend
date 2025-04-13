@@ -13,10 +13,12 @@ app.use(express.json());
 // Import Routes
 const UserRoutes = require("./routes/User");
 const ResidentRoutes = require("./routes/Residents");
+const ResidentContactRoutes = require("./routes/ResidentContact");
 
 // Use Routes
 app.use("/users", UserRoutes);
 app.use("/residents", ResidentRoutes);
+app.use("/residentContacts", ResidentContactRoutes);
 
 // Test Route
 app.get("/", (req, res) => {
