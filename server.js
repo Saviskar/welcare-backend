@@ -14,11 +14,13 @@ app.use(express.json());
 const UserRoutes = require("./routes/User");
 const ResidentRoutes = require("./routes/Residents");
 const ResidentContactRoutes = require("./routes/ResidentContact");
+const GuardianRoutes = require("./routes/Guardian");
 
 // Use Routes
 app.use("/users", UserRoutes);
 app.use("/residents", ResidentRoutes);
 app.use("/residentContacts", ResidentContactRoutes);
+app.use("/guardians", GuardianRoutes);
 
 // Test Route
 app.get("/", (req, res) => {
