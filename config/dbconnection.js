@@ -1,5 +1,7 @@
+// Imports
 var mysql = require("mysql");
 
+// Create connection
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -7,7 +9,10 @@ var con = mysql.createConnection({
   database: "welcareDB",
 });
 
+// Check if the connection is established
 con.connect(function (err) {
   if (err) throw err;
   console.log("Connected!");
 });
+
+module.exports = con;
