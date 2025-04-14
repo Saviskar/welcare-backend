@@ -35,7 +35,7 @@ module.exports = {
   `;
 
     const values = [
-      req.body.residentId, // Must exist in the `residents` table
+      req.body.residentId,
 
       req.body.firstContactSurname,
       req.body.firstContactGivenName,
@@ -58,7 +58,7 @@ module.exports = {
 
     con.query(sql, values, (err, results) => {
       if (err) {
-        console.error("Database error:", err); // Log the error for debugging
+        console.error("Database error:", err);
         return res.status(500).json({
           message: "Error creating family contacts",
           error: err.message,
