@@ -9,5 +9,6 @@ const router = express.Router();
 
 // Routers
 router.get("/", GuardianController.getGuardians);
+router.post("/create", GuardianController.createGuardians);
 
 module.exports = router;
