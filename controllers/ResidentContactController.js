@@ -9,4 +9,65 @@ module.exports = {
       return res.json(results);
     });
   },
+
+  createFamilyContacts: (req, res) => {
+    const sql = `
+    INSERT INTO resident_contacts (
+      residentId,
+      firstContactSurname,
+      firstContactGivenName,
+      firstContactAddress,
+      firstContactPostcode,
+      firstContactTelephoneDaily,
+      firstContactTelephoneAfterhours,
+      firstContactRelationship,
+      firstContactEmail,
+
+      secondContactSurname,
+      secondContactGivenName,
+      secondContactAddress,
+      secondContactPostcode,
+      secondContactTelephoneDaily,
+      secondContactTelephoneAfterhours,
+      secondContactRelationship,
+      secondContactEmail
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+    const values = [
+      req.body.residentId, // Must exist in the `residents` table
+
+      req.body.firstContactSurname,
+      req.body.firstContactGivenName,
+      req.body.firstContactAddress,
+      req.body.firstContactPostcode,
+      req.body.firstContactTelephoneDaily,
+      req.body.firstContactTelephoneAfterhours,
+      req.body.firstContactRelationship,
+      req.body.firstContactEmail,
+
+      req.body.secondContactSurname,
+      req.body.secondContactGivenName,
+      req.body.secondContactAddress,
+      req.body.secondContactPostcode,
+      req.body.secondContactTelephoneDaily,
+      req.body.secondContactTelephoneAfterhours,
+      req.body.secondContactRelationship,
+      req.body.secondContactEmail,
+    ];
+
+    con.query(sql, values, (err, results) => {
+      if (err) {
+        console.error("Database error:", err); // Log the error for debugging
+        return res.status(500).json({
+          message: "Error creating family contacts",
+          error: err.message,
+        });
+      }
+      return res.status(201).json({
+        message: "Family contacts created successfully",
+        insertId: results.insertId,
+      });
+    });
+  },
 };
