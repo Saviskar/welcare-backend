@@ -12,7 +12,7 @@ var con = mysql.createConnection({
 // Check if the connection is established
 con.connect(function (err) {
   if (err) throw err;
-  console.log("Connected!");
+  console.log("DB Connected!");
 });
 
 module.exports = con;
