@@ -40,6 +40,7 @@ module.exports = {
           .status(500)
           .json({ message: "Error creating guardian", error: err });
       }
+      console.log(result);
       res
         .status(201)
         .json({ message: "Guardian created successfully", result });
