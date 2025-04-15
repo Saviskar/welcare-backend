@@ -9,6 +9,7 @@ const router = express.Router();
 
 // Routers
 router.get("/", ResidentContactController.getFamilyContacts);
+router.get("/:id", ResidentContactController.getFamilyContactsById);
 router.post("/create", ResidentContactController.createFamilyContacts);
 
 module.exports = router;

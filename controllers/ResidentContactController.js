@@ -10,6 +10,29 @@ module.exports = {
     });
   },
 
+  // have to use this controller logic in the routes
+  getFamilyContactsById: (req, res) => {
+    const residentId = req.params.id;
+    const sql = "SELECT * FROM resident_contacts WHERE residentId = ?";
+
+    con.query(sql, residentId, (err, results) => {
+      if (err) {
+        console.error("Database error:", err);
+        return res
+          .status(500)
+          .json({ message: "Error retrieving data", error: err.message });
+      }
+
+      if (results.length === 0) {
+        return res.status(404).json({
+          message: "No family contacts found for the given resident ID",
+        });
+      }
+
+      return res.json(results[0]);
+    });
+  },
+
   createFamilyContacts: (req, res) => {
     const sql = `
     INSERT INTO resident_contacts (

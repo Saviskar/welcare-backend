@@ -5,6 +5,8 @@ const cors = require("cors");
 // App and port
 const app = express();
 const PORT = 3000;
+
+// Cross origin resource sharing
 app.use(cors());
 
 // Parses data and makes it available in req.body
