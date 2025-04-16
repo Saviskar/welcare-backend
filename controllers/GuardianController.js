@@ -10,6 +10,16 @@ module.exports = {
     });
   },
 
+  readGuardians: (req, res) => {
+    const sql = `SELECT * FROM guardians WHERE residentId = ?`;
+    const id = req.params.id;
+
+    con.query(sql, [id], (err, results) => {
+      if (err) return console.log(`Error: ${err}`);
+      return res.json(results);
+    });
+  },
+
   createGuardians: (req, res) => {
     const sql = `INSERT INTO guardians (
       residentId,

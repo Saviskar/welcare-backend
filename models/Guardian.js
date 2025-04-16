@@ -14,7 +14,10 @@ const sql = `
     guardianEmail VARCHAR(100),
     guardianRelationshipToGuest VARCHAR(100),
     PRIMARY KEY (guardianId),
-    CONSTRAINT fk_resident_guardian FOREIGN KEY (residentId) REFERENCES residents(residentId)
+    
+    CONSTRAINT fk_resident_guardian FOREIGN KEY (residentId) 
+    REFERENCES residents(residentId)
+    ON DELETE CASCADE
   )
 `;
 

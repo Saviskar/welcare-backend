@@ -27,7 +27,9 @@ const sql = `
     secondContactRelationship VARCHAR(100),
     secondContactEmail VARCHAR(100),
 
-    CONSTRAINT FK_Resident FOREIGN KEY (residentId) REFERENCES residents(residentId)
+    CONSTRAINT FK_Resident FOREIGN KEY (residentId) 
+    REFERENCES residents(residentId)
+    ON DELETE CASCADE
   )
 `;
 

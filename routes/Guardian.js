@@ -10,5 +10,6 @@ const router = express.Router();
 // Routers
 router.get("/", GuardianController.getGuardians);
 router.post("/create", GuardianController.createGuardians);
+router.get("/:id", GuardianController.readGuardians);
 
 module.exports = router;
