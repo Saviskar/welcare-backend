@@ -9,8 +9,8 @@ const router = express.Router();
 
 // Routers
 router.get("/", ResidentController.getResidents);
-router.post("/create", ResidentController.createResidents);
 router.get("/:id", ResidentController.readResident);
-// router.post("/delete/:id", ResidentController.deleteResidents);
+router.post("/create", ResidentController.createResidents);
+router.delete("/delete/:id", ResidentController.deleteResident);
 
 module.exports = router;

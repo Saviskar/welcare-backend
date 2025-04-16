@@ -47,4 +47,14 @@ module.exports = {
       return res.status(201).json(results);
     });
   },
+
+  deleteResident: (req, res) => {
+    const sql = `DELETE FROM residents WHERE residentId = ?`;
+    const id = req.params.id;
+
+    con.query(sql, [id], (err, result) => {
+      if (err) return res.json({ Message: "Error inside server" });
+      return res.json(result);
+    });
+  },
 };
