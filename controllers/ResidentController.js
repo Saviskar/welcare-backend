@@ -10,6 +10,16 @@ module.exports = {
     });
   },
 
+  readResident: (req, res) => {
+    const sql = `SELECT * FROM residents WHERE residentId = ?`;
+    const id = req.params.id;
+
+    con.query(sql, [id], (err, results) => {
+      if (err) return console.log(`Error: ${err}`);
+      return res.json(results[0]);
+    });
+  },
+
   createResidents: (req, res) => {
     const sql = `
     INSERT INTO residents (
