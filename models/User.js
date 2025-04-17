@@ -17,3 +17,13 @@ con.query(sql, function (err, result) {
   if (err) throw err;
   console.log("Users table created");
 });
+
+
+export const getUsers = async () =>{
+    const sql = `SELECT * FROM users`;
+ 
+     await con.query(sql, (err, results) => {
+       if (err) return console.log(`Error:${err}`);
+       return results;
+     });
+}

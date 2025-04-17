@@ -1,10 +1,10 @@
-import con from '../config/dbconnection.js';
+import {getUsers} from '../services/UserService'
 
-export const getUser = (req, res) => {
-    const sql = `SELECT * FROM users`;
-
-    con.query(sql, (err, results) => {
-      if (err) return console.log(`Error:${err}`);
-      return res.json(results);
-    });
+export const getUsers = async (req, res) => {
+    try{
+      const users = await getUsers(); 
+      res.json(users); 
+    }catch(err){
+       res.status(500).json({message:err.message})
+    }
 };
