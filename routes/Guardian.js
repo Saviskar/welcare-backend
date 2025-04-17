@@ -1,13 +1,16 @@
 // Import modules
-const express = require("express");
+import express from 'express';
 
-// Import UserController
-const GuardianController = require("../controllers/GuardianController");
+// Import GuardianController using dynamic import or updated export style
+import { getGuardians, createGuardians, readGuardians } from '../controllers/GuardianController.js';
 
 // Create router
 const router = express.Router();
 
 // Routers
-router.get("/", GuardianController.getGuardians);
+router.get("/", getGuardians);
+router.post("/create", createGuardians);
+router.get("/:id", readGuardians);
 
-module.exports = router;
+// Export router using ESM
+export default router;

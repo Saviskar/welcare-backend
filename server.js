@@ -1,33 +1,23 @@
-// Import modules
-const express = require("express");
-const cors = require("cors");
+import express from 'express';
+import cors from 'cors';
+import routes from './routes/index.js';
 
 // App and port
 const app = express();
 const PORT = 3000;
-app.use(cors());
 
-// Parses data and makes it available in req.body
+// Middleware
+app.use(cors());
 app.use(express.json());
 
-// Import Routes
-const UserRoutes = require("./routes/User");
-const ResidentRoutes = require("./routes/Residents");
-const ResidentContactRoutes = require("./routes/ResidentContact");
-const GuardianRoutes = require("./routes/Guardian");
-
-// Use Routes
-app.use("/users", UserRoutes);
-app.use("/residents", ResidentRoutes);
-app.use("/residentContacts", ResidentContactRoutes);
-app.use("/guardians", GuardianRoutes);
-
 // Test Route
-app.get("/", (req, res) => {
-  res.send("Hello, World!");
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
 });
 
-// Server runs on port
+app.use('/',routes);
+
+// Start Server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
