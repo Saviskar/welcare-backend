@@ -1,5 +1,5 @@
 // Imports
-const con = require("../config/dbconnection");
+import con from '../config/dbconnection'
 
 // SQL statement to create the guardians table
 const sql = `

@@ -1,15 +1,14 @@
-// Import modules
-const express = require("express");
+import express from 'express';
+import {
+  getFamilyContacts,
+  readFamilyContacts,
+  createFamilyContacts,
+} from '../controllers/ResidentContactController.js';
 
-// Import UserController
-const ResidentContactController = require("../controllers/ResidentContactController");
-
-// Create router
 const router = express.Router();
 
-// Routers
-router.get("/", ResidentContactController.getFamilyContacts);
-router.get("/:id", ResidentContactController.readFamilyContacts);
-router.post("/create", ResidentContactController.createFamilyContacts);
+router.get('/', getFamilyContacts);
+router.get('/:id', readFamilyContacts);
+router.post('/create', createFamilyContacts);
 
-module.exports = router;
+export default router;

@@ -1,59 +1,55 @@
-const con = require("../config/dbconnection");
+import con from '../config/dbconnection.js';
 
-module.exports = {
-  getGuardians: (req, res) => {
-    const sql = "SELECT * FROM guardians";
+export const getGuardians = (req, res) => {
+  const sql = "SELECT * FROM guardians";
 
-    con.query(sql, (err, results) => {
-      if (err) return console.log(`Error: ${err}`);
-      return res.json(results);
-    });
-  },
+  con.query(sql, (err, results) => {
+    if (err) return console.log(`Error: ${err}`);
+    return res.json(results);
+  });
+};
 
-  readGuardians: (req, res) => {
-    const sql = `SELECT * FROM guardians WHERE residentId = ?`;
-    const id = req.params.id;
+export const readGuardians = (req, res) => {
+  const sql = `SELECT * FROM guardians WHERE residentId = ?`;
+  const id = req.params.id;
 
-    con.query(sql, [id], (err, results) => {
-      if (err) return console.log(`Error: ${err}`);
-      return res.json(results);
-    });
-  },
+  con.query(sql, [id], (err, results) => {
+    if (err) return console.log(`Error: ${err}`);
+    return res.json(results);
+  });
+};
 
-  createGuardians: (req, res) => {
-    const sql = `INSERT INTO guardians (
-      residentId,
-      guardianSurname,
-      guardianGivenName,
-      guardianAddress,
-      guardianPostcode,
-      guardianMobile,
-      guardianEmail,
-      guardianRelationshipToGuest
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+export const createGuardians = (req, res) => {
+  const sql = `INSERT INTO guardians (
+    residentId,
+    guardianSurname,
+    guardianGivenName,
+    guardianAddress,
+    guardianPostcode,
+    guardianMobile,
+    guardianEmail,
+    guardianRelationshipToGuest
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-    const values = [
-      req.body.residentId,
-      req.body.guardianSurname,
-      req.body.guardianGivenName,
-      req.body.guardianAddress,
-      req.body.guardianPostcode,
-      req.body.guardianMobile,
-      req.body.guardianEmail,
-      req.body.guardianRelationshipToGuest,
-    ];
+  const values = [
+    req.body.residentId,
+    req.body.guardianSurname,
+    req.body.guardianGivenName,
+    req.body.guardianAddress,
+    req.body.guardianPostcode,
+    req.body.guardianMobile,
+    req.body.guardianEmail,
+    req.body.guardianRelationshipToGuest,
+  ];
 
-    con.query(sql, values, (err, result) => {
-      if (err) {
-        console.error("Error creating guardian:", err);
-        return res
-          .status(500)
-          .json({ message: "Error creating guardian", error: err });
-      }
-      console.log(result);
-      res
-        .status(201)
-        .json({ message: "Guardian created successfully", result });
-    });
-  },
+  con.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Error creating guardian:", err);
+      return res
+        .status(500)
+        .json({ message: "Error creating guardian", error: err });
+    }
+    console.log(result);
+    res.status(201).json({ message: "Guardian created successfully", result });
+  });
 };
