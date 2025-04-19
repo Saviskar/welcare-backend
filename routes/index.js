@@ -7,9 +7,9 @@ import GuardianRoutes from './Guardian.js';
 
 const router = express.Router();
 
-router.use('/users', UserRoutes);
-router.use('/residents', ResidentRoutes);
-router.use('/residentContacts', ResidentContactRoutes);
-router.use('/guardians', GuardianRoutes);
+router.use('/user', UserRoutes);
+router.use('/resident', ResidentRoutes);
+router.use('/residentContact', ResidentContactRoutes);
+router.use('/guardian', GuardianRoutes);
 
 export default router;

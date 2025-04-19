@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import routes from './routes/index.js';
 
+
 // App and port
 const app = express();
 const PORT = 3000;
@@ -15,7 +16,7 @@ app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
-app.use('/',routes);
+app.use('/api',routes);
 
 // Start Server
 app.listen(PORT, () => {

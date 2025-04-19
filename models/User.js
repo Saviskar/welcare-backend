@@ -1,5 +1,5 @@
 // Imports
-import con from '../config/dbconnection'
+import con from '../config/DBConnection'
 
 // SQL statement to create the users table
 const sql = `
@@ -19,7 +19,7 @@ con.query(sql, function (err, result) {
 });
 
 
-export const getUsers = async () =>{
+export const getAllUsers = async () =>{
     const sql = `SELECT * FROM users`;
  
      await con.query(sql, (err, results) => {

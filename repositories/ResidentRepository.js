@@ -19,13 +19,15 @@ const sql = `
 `;
 
 // Run the query
-con.query(sql, function (err, result) {
+con.execute(sql)
+.then(()=>{
+  console.log("Resdient table created");
+})
+.catch(()=>{
   if (err) throw err;
-  console.log("Residents table created");
 });
 
-
-export const createResidents = (req, res) => {
+export const save = () => {
     const sql = `
       INSERT INTO residents (
         surname, givenName, preferredNames, age,
@@ -53,7 +55,7 @@ export const createResidents = (req, res) => {
     });
 };
 
-export const getResidents = (req, res) => {
+export const findAll = () => {
   const sql = "SELECT * FROM residents";
 
   con.query(sql, (err, results) => {
@@ -62,9 +64,8 @@ export const getResidents = (req, res) => {
   });
 };
 
-export const getResidentById = (req, res) => {
+export const findById = (id) => {
   const sql = `SELECT * FROM residents WHERE residentId = ?`;
-  const id = req.params.id;
 
   con.query(sql, [id], (err, results) => {
     if (err) return console.log(`Error: ${err}`);
@@ -72,7 +73,7 @@ export const getResidentById = (req, res) => {
   });
 };
 
-export const deleteResident = (req, res) => {
+export const remove = (req, res) => {
   const sql = `DELETE FROM residents WHERE residentId = ?`;
   const id = req.params.id;
 

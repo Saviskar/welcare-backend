@@ -1,8 +1,8 @@
-import {getResidents} from '../services/ResidentService.js' 
+import {getAllResidents} from '../services/ResidentService.js' 
 
 export const getResidents = async (req, res) => {
  try{
-      const residents = await getResidents(); 
+      const residents = await getAllResidents(); 
       res.json(residents); 
     }catch(err){
        res.status(500).json({message:err.message})
@@ -10,7 +10,7 @@ export const getResidents = async (req, res) => {
 };
 
 export const getResidentById = (req, res) => {
-
+   const id = req.params.id;
 };
 
 export const createResident = (req, res) => {
