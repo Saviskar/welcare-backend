@@ -1,4 +1,4 @@
-import con from '../config/dbconnection.js';
+import con from '../config/DBConnection.js';
 
 export const getFamilyContacts = (req, res) => {
   const sql = "SELECT * FROM resident_contacts";

@@ -1,4 +1,4 @@
-import con from '../config/dbconnection.js';
+import con from '../config/DBConnection.js';
 
 export const getGuardians = (req, res) => {
   const sql = "SELECT * FROM guardians";

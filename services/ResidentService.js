@@ -1,8 +1,8 @@
-import resident from '../models/Resident'
+import * as residentRepository from '../repositories/ResidentRepository.js'
 
 
-export const getResidents = async() =>{
-    const residents = await resident.getResidents();
+export const getAllResidents = async() =>{
+    const residents = await residentRepository.findAll();
     return residents;
 }
 
