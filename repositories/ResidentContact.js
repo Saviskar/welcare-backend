@@ -34,7 +34,11 @@ const sql = `
 `;
 
 // Run the query
-con.query(sql, function (err, result) {
-  if (err) throw err;
-  console.log("Resident Contact table created");
-});
+con
+  .execute(sql)
+  .then(() => {
+    console.log("ResidentContact table created");
+  })
+  .catch(() => {
+    if (err) throw err;
+  });

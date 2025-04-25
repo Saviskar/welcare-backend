@@ -16,7 +16,7 @@ const sql = `
 con
   .execute(sql)
   .then(() => {
-    console.log("Users table created");
+    // console.log("Users table created");
   })
   .catch(() => {
     if (err) throw err;
