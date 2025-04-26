@@ -6,8 +6,8 @@ export const getAllResidents = async () => {
 };
 
 //getResidentById
-export const getAllResidentById = async () => {
-  const resident = await residentRepository.findById();
+export const getAllResidentById = async (id) => {
+  const resident = await residentRepository.findById(id);
   return resident;
 };
 

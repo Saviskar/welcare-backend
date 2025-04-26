@@ -1,6 +1,7 @@
 import {
   getAllResidents,
   createResident,
+  getAllResidentById,
 } from "../services/ResidentService.js";
 
 export const getResidents = async (req, res) => {
@@ -12,8 +13,18 @@ export const getResidents = async (req, res) => {
   }
 };
 
-export const getResidentById = (req, res) => {
+export const getResidentById = async (req, res) => {
   const id = req.params.id;
+
+  try {
+    const resident = await getAllResidentById(id);
+    if (resident.length === 0) {
+      return res.status(404).json({ message: "Resident not found" });
+    }
+    res.json(resident[0]);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 export const createNewResident = async (req, res) => {
