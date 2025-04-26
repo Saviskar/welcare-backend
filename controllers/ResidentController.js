@@ -2,6 +2,7 @@ import {
   getAllResidents,
   createResident,
   getAllResidentById,
+  deleteResidentById,
 } from "../services/ResidentService.js";
 
 export const getResidents = async (req, res) => {
@@ -36,4 +37,13 @@ export const createNewResident = async (req, res) => {
   }
 };
 
-export const deleteResident = (req, res) => {};
+export const deleteResident = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const resident = await deleteResidentById(id);
+    res.json(resident);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

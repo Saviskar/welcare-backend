@@ -71,7 +71,7 @@ export const findById = async (id) => {
   return result[0];
 };
 
-export const remove = async (req, res) => {
+export const remove = async (id) => {
   const sql = `DELETE FROM residents WHERE residentId = ?`;
 
   const result = await con.execute(sql, [id]);
