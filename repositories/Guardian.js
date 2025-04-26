@@ -1,5 +1,5 @@
 // Imports
-import con from '../config/dbconnection'
+import con from "../config/DBConnection.js";
 
 // SQL statement to create the guardians table
 const sql = `

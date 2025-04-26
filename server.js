@@ -1,7 +1,6 @@
-import express from 'express';
-import cors from 'cors';
-import routes from './routes/index.js';
-
+import express from "express";
+import cors from "cors";
+import routes from "./routes/index.js";
 
 // App and port
 const app = express();
@@ -12,11 +11,12 @@ app.use(cors());
 app.use(express.json());
 
 // Test Route
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
+app.get("/", (req, res) => {
+  res.send("Hello, World!");
 });
 
-app.use('/api',routes);
+// Main Route
+app.use("/api", routes);
 
 // Start Server
 app.listen(PORT, () => {

@@ -1,5 +1,5 @@
 // Imports
-import con from '../config/dbconnection'
+import con from "../config/DBConnection.js";
 
 // SQL statement to create the residents table
 const sql = `
@@ -34,7 +34,11 @@ const sql = `
 `;
 
 // Run the query
-con.query(sql, function (err, result) {
-  if (err) throw err;
-  console.log("Resident Contact table created");
-});
+con
+  .execute(sql)
+  .then(() => {
+    console.log("ResidentContact table created");
+  })
+  .catch(() => {
+    if (err) throw err;
+  });

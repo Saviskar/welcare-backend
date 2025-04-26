@@ -1,5 +1,5 @@
 // Imports
-import con from '../config/DBConnection.js'
+import con from "../config/DBConnection.js";
 
 // SQL statement to create the users table
 const sql = `
@@ -13,29 +13,28 @@ const sql = `
 `;
 
 // Run the query
-con.execute(sql)
-.then(()=>{
-  console.log("Users table created");
-})
-.catch(()=>{
-  if (err) throw err;
-});
+con
+  .execute(sql)
+  .then(() => {
+    // console.log("Users table created");
+  })
+  .catch(() => {
+    if (err) throw err;
+  });
 
+export const findAll = async () => {
+  const sql = `SELECT * FROM users`;
 
-export const findAll = async () =>{
-    const sql = `SELECT * FROM users`;
- 
-    const result = await con.execute(sql);
+  const result = await con.execute(sql);
 
-    return result;
-}
+  console.log(result);
+  return result[0];
+};
 
-export const findByIdAndPwd = async (id,pwd) =>{
-
+export const findByIdAndPwd = async (id, pwd) => {
   const sql = `SELECT * FROM users where userid = ? AND password = ?`;
 
-  const result = await con.execute(sql,[id,pwd]);
-  
-  return result[0][0];
+  const result = await con.execute(sql, [id, pwd]);
 
-}
+  return result[0][0];
+};
