@@ -59,8 +59,7 @@ export const findAll = async () => {
   const sql = "SELECT * FROM residents";
 
   const result = await con.execute(sql);
-  console.log(result);
-  return result[0];
+  return result;
 };
 
 export const findById = async (id) => {

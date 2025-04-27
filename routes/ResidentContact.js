@@ -1,14 +1,15 @@
-import express from 'express';
+import express from "express";
 import {
-  getFamilyContacts,
-  readFamilyContacts,
-  createFamilyContacts,
-} from '../controllers/ResidentContactController.js';
+  getResidentContacts,
+  getResidentContact,
+  createNewResidentContact,
+} from "../controllers/ResidentContactController.js";
 
 const router = express.Router();
 
-router.get('/', getFamilyContacts);
-router.get('/:id', readFamilyContacts);
-router.post('/create', createFamilyContacts);
+router.get("/", getResidentContacts);
+router.get("/:id", getResidentContact);
+router.post("/create", createNewResidentContact);
+// router.delete("/delete:id", ) // all the top functions are working only have to make delete function work
 
 export default router;
