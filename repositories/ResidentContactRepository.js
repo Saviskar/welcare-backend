@@ -58,7 +58,7 @@ export const findById = async (id) => {
 };
 
 export const remove = async (id) => {
-  const sql = `DELETE * FROM resident_contacts WHERE residentId = ?`;
+  const sql = `DELETE FROM resident_contacts WHERE residentId = ?`;
 
   const result = con.execute(sql, [id]);
   console.log(result);

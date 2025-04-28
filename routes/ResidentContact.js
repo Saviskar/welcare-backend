@@ -3,6 +3,7 @@ import {
   getResidentContacts,
   getResidentContact,
   createNewResidentContact,
+  deleteResidentContact,
 } from "../controllers/ResidentContactController.js";
 
 const router = express.Router();
@@ -10,6 +11,6 @@ const router = express.Router();
 router.get("/", getResidentContacts);
 router.get("/:id", getResidentContact);
 router.post("/create", createNewResidentContact);
-// router.delete("/delete:id", ) // all the top functions are working only have to make delete function work
+router.delete("/delete/:id", deleteResidentContact);
 
 export default router;
