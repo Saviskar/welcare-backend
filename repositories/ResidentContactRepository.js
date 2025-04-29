@@ -57,6 +57,56 @@ export const findById = async (id) => {
   return result[0];
 };
 
+export const update = async (id, data) => {
+  const sql = `
+    UPDATE resident_contacts SET 
+      firstContactSurname = ?,
+      firstContactGivenName = ?,
+      firstContactAddress = ?,
+      firstContactPostcode = ?,
+      firstContactTelephoneDaily = ?,
+      firstContactTelephoneAfterhours = ?,
+      firstContactRelationship = ?,
+      firstContactEmail = ?,
+      
+      secondContactSurname = ?,
+      secondContactGivenName = ?,
+      secondContactAddress = ?,
+      secondContactPostcode = ?,
+      secondContactTelephoneDaily = ?,
+      secondContactTelephoneAfterhours = ?,
+      secondContactRelationship = ?,
+      secondContactEmail = ?
+    WHERE residentId = ?
+  `;
+
+  const values = [
+    data.firstContactSurname,
+    data.firstContactGivenName,
+    data.firstContactAddress,
+    data.firstContactPostcode,
+    data.firstContactTelephoneDaily,
+    data.firstContactTelephoneAfterhours,
+    data.firstContactRelationship,
+    data.firstContactEmail,
+
+    data.secondContactSurname,
+    data.secondContactGivenName,
+    data.secondContactAddress,
+    data.secondContactPostcode,
+    data.secondContactTelephoneDaily,
+    data.secondContactTelephoneAfterhours,
+    data.secondContactRelationship,
+    data.secondContactEmail,
+
+    id,
+  ];
+
+  const result = await con.execute(sql, values);
+  console.log(result);
+  return result;
+};
+
 export const remove = async (id) => {
   const sql = `DELETE FROM resident_contacts WHERE residentId = ?`;
 

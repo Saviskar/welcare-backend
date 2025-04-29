@@ -15,6 +15,11 @@ export const createResidentContact = async (data) => {
   return residentContact;
 };
 
+export const updateResidentContact = async (id, data) => {
+  const residentContact = await residentContactRepository.update(id, data);
+  return residentContact;
+};
+
 export const deleteResidentContactById = async (id) => {
   const residentContact = await residentContactRepository.remove(id);
   return residentContact;
