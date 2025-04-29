@@ -6,6 +6,7 @@ import {
   getGuardians,
   getGuardian,
   createNewGuardian,
+  updateGuardian,
   deleteGuardian,
 } from "../controllers/GuardianController.js";
 
@@ -16,6 +17,7 @@ const router = express.Router();
 router.get("/", getGuardians);
 router.post("/create", createNewGuardian);
 router.get("/:id", getGuardian);
+router.put("/update/:id", updateGuardian);
 
 // Export router using ESM
 export default router;

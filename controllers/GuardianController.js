@@ -2,6 +2,7 @@ import {
   getAllGuardians,
   getGuardianById,
   createGuardian,
+  updateGuardianById,
   deleteGuardianById,
 } from "../services/GuardianServices.js";
 
@@ -21,6 +22,17 @@ export const getGuardian = async (req, res) => {
   try {
     const getGuardian = await getGuardianById(id);
     res.json(getGuardian);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const updateGuardian = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const updateGuardian = await updateGuardianById(id, req.body);
+    res.json(updateGuardian);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

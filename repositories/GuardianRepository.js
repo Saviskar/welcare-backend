@@ -75,6 +75,35 @@ export const save = async (data) => {
   return result;
 };
 
+export const update = async (id, data) => {
+  const sql = `
+    UPDATE guardians SET
+      guardianSurname = ?,
+      guardianGivenName = ?,
+      guardianAddress = ?,
+      guardianPostcode = ?,
+      guardianMobile = ?,
+      guardianEmail = ?,
+      guardianRelationshipToGuest = ?
+    WHERE residentId = ?`;
+
+  const values = [
+    data.guardianSurname,
+    data.guardianGivenName,
+    data.guardianAddress,
+    data.guardianPostcode,
+    data.guardianMobile,
+    data.guardianEmail,
+    data.guardianRelationshipToGuest,
+
+    id,
+  ];
+
+  const result = await con.execute(sql, values);
+  console.log(result);
+  return result[0];
+};
+
 export const remove = async (id) => {
   const sql = `DELETE FROM guardians WHERE residentId = ?`;
 
