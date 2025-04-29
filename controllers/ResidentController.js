@@ -3,6 +3,7 @@ import {
   createResident,
   getAllResidentById,
   deleteResidentById,
+  updateResident,
 } from "../services/ResidentService.js";
 
 export const getResidents = async (req, res) => {
@@ -32,6 +33,17 @@ export const createNewResident = async (req, res) => {
   try {
     const resident = await createResident(req.body);
     res.json(resident);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const updateResidentById = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const updatedResident = await updateResident(id, req.body);
+    res.json(updatedResident);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

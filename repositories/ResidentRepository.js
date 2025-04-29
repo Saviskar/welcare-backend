@@ -70,6 +70,34 @@ export const findById = async (id) => {
   return result[0];
 };
 
+export const update = async (id, data) => {
+  const sql = `
+    UPDATE residents SET
+      surname = ?, givenName = ?, preferredNames = ?, age = ?,
+      maritalStatus = ?, telephone = ?, postCode = ?,
+      religion = ?, countryOfBirth = ?, preferredLanguage = ?
+    WHERE residentId = ?
+  `;
+
+  const values = [
+    data.surname,
+    data.givenName,
+    data.preferredNames,
+    data.age,
+    data.maritalStatus,
+    data.telephone,
+    data.postCode,
+    data.religion,
+    data.countryOfBirth,
+    data.preferredLanguage,
+    id,
+  ];
+
+  const result = await con.execute(sql, values);
+  console.log(result);
+  return result;
+};
+
 export const remove = async (id) => {
   const sql = `DELETE FROM residents WHERE residentId = ?`;
 

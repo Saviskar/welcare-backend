@@ -17,6 +17,12 @@ export const createResident = async (data) => {
   return resident;
 };
 
+// updateResident
+export const updateResident = async (id, data) => {
+  const resident = await residentRepository.update(id, data);
+  return resident;
+};
+
 //deleteResident
 export const deleteResidentById = async (id) => {
   const resident = await residentRepository.remove(id);
