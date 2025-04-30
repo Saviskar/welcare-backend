@@ -2,6 +2,7 @@ import {
   getAllResidentContacts,
   createResidentContact,
   deleteResidentContactById,
+  updateResidentContactById,
   getResidentContactById,
 } from "../services/ResidentContactService.js";
 
@@ -29,6 +30,17 @@ export const getResidentContact = async (req, res) => {
 export const createNewResidentContact = async (req, res) => {
   try {
     const residentContact = await createResidentContact(req.body);
+    res.json(residentContact);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const updateResidentContact = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const residentContact = await updateResidentContactById(id, req.body);
     res.json(residentContact);
   } catch (err) {
     res.status(500).json({ message: err.message });

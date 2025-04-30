@@ -37,7 +37,7 @@ const sql = `
 con
   .execute(sql)
   .then(() => {
-    console.log("ResidentContact table created");
+    // console.log("ResidentContact table created");
   })
   .catch(() => {
     if (err) throw err;
@@ -110,7 +110,7 @@ export const update = async (id, data) => {
 export const remove = async (id) => {
   const sql = `DELETE FROM resident_contacts WHERE residentId = ?`;
 
-  const result = con.execute(sql, [id]);
+  const result = await con.execute(sql, [id]);
   console.log(result);
   return result;
 };
@@ -161,7 +161,7 @@ export const save = async (data) => {
     data.secondContactEmail,
   ];
 
-  const result = con.execute(sql, values);
+  const result = await con.execute(sql, values);
   console.log(result);
   return result;
 };

@@ -15,7 +15,7 @@ export const createResidentContact = async (data) => {
   return residentContact;
 };
 
-export const updateResidentContact = async (id, data) => {
+export const updateResidentContactById = async (id, data) => {
   const residentContact = await residentContactRepository.update(id, data);
   return residentContact;
 };
