@@ -1,55 +1,59 @@
-import con from '../config/DBConnection.js';
+import {
+  getAllGuardians,
+  getGuardianById,
+  createGuardian,
+  updateGuardianById,
+  deleteGuardianById,
+} from "../services/GuardianServices.js";
 
-export const getGuardians = (req, res) => {
-  const sql = "SELECT * FROM guardians";
-
-  con.query(sql, (err, results) => {
-    if (err) return console.log(`Error: ${err}`);
-    return res.json(results);
-  });
+export const getGuardians = async (req, res) => {
+  try {
+    const guardians = await getAllGuardians();
+    console.log(guardians);
+    res.json(guardians);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
-export const readGuardians = (req, res) => {
-  const sql = `SELECT * FROM guardians WHERE residentId = ?`;
+export const getGuardian = async (req, res) => {
   const id = req.params.id;
 
-  con.query(sql, [id], (err, results) => {
-    if (err) return console.log(`Error: ${err}`);
-    return res.json(results);
-  });
+  try {
+    const getGuardian = await getGuardianById(id);
+    res.json(getGuardian);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
-export const createGuardians = (req, res) => {
-  const sql = `INSERT INTO guardians (
-    residentId,
-    guardianSurname,
-    guardianGivenName,
-    guardianAddress,
-    guardianPostcode,
-    guardianMobile,
-    guardianEmail,
-    guardianRelationshipToGuest
-  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+export const updateGuardian = async (req, res) => {
+  const id = req.params.id;
 
-  const values = [
-    req.body.residentId,
-    req.body.guardianSurname,
-    req.body.guardianGivenName,
-    req.body.guardianAddress,
-    req.body.guardianPostcode,
-    req.body.guardianMobile,
-    req.body.guardianEmail,
-    req.body.guardianRelationshipToGuest,
-  ];
+  try {
+    const updateGuardian = await updateGuardianById(id, req.body);
+    res.json(updateGuardian);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
-  con.query(sql, values, (err, result) => {
-    if (err) {
-      console.error("Error creating guardian:", err);
-      return res
-        .status(500)
-        .json({ message: "Error creating guardian", error: err });
-    }
-    console.log(result);
-    res.status(201).json({ message: "Guardian created successfully", result });
-  });
+export const createNewGuardian = async (req, res) => {
+  try {
+    const guardian = await createGuardian(req.body);
+    res.json(guardian);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const deleteGuardian = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const guardian = await deleteGuardianById(id);
+    res.json(guardian);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };

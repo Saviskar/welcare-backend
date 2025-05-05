@@ -1,5 +1,5 @@
 // Imports
-import con from '../config/DBConnection.js';
+import con from "../config/DBConnection.js";
 
 // SQL statement to create the residents table
 const sql = `
@@ -19,66 +19,89 @@ const sql = `
 `;
 
 // Run the query
-con.execute(sql)
-.then(()=>{
-  console.log("Resdient table created");
-})
-.catch(()=>{
-  if (err) throw err;
-});
+con
+  .execute(sql)
+  .then(() => {
+    // console.log("Resdient table created");
+  })
+  .catch((err) => {
+    if (err) throw err;
+  });
 
-export const save = () => {
-    const sql = `
+export const save = async (data) => {
+  const sql = `
       INSERT INTO residents (
         surname, givenName, preferredNames, age,
         maritalStatus, telephone, postCode,
         religion, countryOfBirth, preferredLanguage
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
-  
-    const values = [
-      req.body.surname,
-      req.body.givenName,
-      req.body.preferredNames,
-      req.body.age,
-      req.body.maritalStatus,
-      req.body.telephone,
-      req.body.postCode,
-      req.body.religion,
-      req.body.countryOfBirth,
-      req.body.preferredLanguage,
-    ];
-  
-    con.query(sql, values, (err, results) => {
-      if (err) return res.status(500).json(err);
-      return results;
-    });
+
+  const values = [
+    data.surname,
+    data.givenName,
+    data.preferredNames,
+    data.age,
+    data.maritalStatus,
+    data.telephone,
+    data.postCode,
+    data.religion,
+    data.countryOfBirth,
+    data.preferredLanguage,
+  ];
+
+  const result = await con.execute(sql, values);
+  console.log(result);
+  return result;
 };
 
-export const findAll = () => {
+export const findAll = async () => {
   const sql = "SELECT * FROM residents";
 
-  con.query(sql, (err, results) => {
-    if (err) return console.log(`Error: ${err}`);
-    return results;
-  });
+  const result = await con.execute(sql);
+  return result;
 };
 
-export const findById = (id) => {
+export const findById = async (id) => {
   const sql = `SELECT * FROM residents WHERE residentId = ?`;
 
-  con.query(sql, [id], (err, results) => {
-    if (err) return console.log(`Error: ${err}`);
-    return results[0];
-  });
+  const result = await con.execute(sql, [id]);
+  console.log(result);
+  return result[0];
 };
 
-export const remove = (req, res) => {
-  const sql = `DELETE FROM residents WHERE residentId = ?`;
-  const id = req.params.id;
+export const update = async (id, data) => {
+  const sql = `
+    UPDATE residents SET
+      surname = ?, givenName = ?, preferredNames = ?, age = ?,
+      maritalStatus = ?, telephone = ?, postCode = ?,
+      religion = ?, countryOfBirth = ?, preferredLanguage = ?
+    WHERE residentId = ?
+  `;
 
-  con.query(sql, [id], (err, result) => {
-    if (err) return res.json({ message: "Error inside server" });
-    return result;
-  });
+  const values = [
+    data.surname,
+    data.givenName,
+    data.preferredNames,
+    data.age,
+    data.maritalStatus,
+    data.telephone,
+    data.postCode,
+    data.religion,
+    data.countryOfBirth,
+    data.preferredLanguage,
+    id,
+  ];
+
+  const result = await con.execute(sql, values);
+  console.log(result);
+  return result;
+};
+
+export const remove = async (id) => {
+  const sql = `DELETE FROM residents WHERE residentId = ?`;
+
+  const result = await con.execute(sql, [id]);
+  console.log(result);
+  return result;
 };

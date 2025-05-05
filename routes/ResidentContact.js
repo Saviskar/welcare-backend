@@ -1,14 +1,18 @@
-import express from 'express';
+import express from "express";
 import {
-  getFamilyContacts,
-  readFamilyContacts,
-  createFamilyContacts,
-} from '../controllers/ResidentContactController.js';
+  getResidentContacts,
+  getResidentContact,
+  createNewResidentContact,
+  updateResidentContact,
+  deleteResidentContact,
+} from "../controllers/ResidentContactController.js";
 
 const router = express.Router();
 
-router.get('/', getFamilyContacts);
-router.get('/:id', readFamilyContacts);
-router.post('/create', createFamilyContacts);
+router.get("/", getResidentContacts);
+router.get("/:id", getResidentContact);
+router.post("/create", createNewResidentContact);
+router.put("/update/:id", updateResidentContact);
+router.delete("/delete/:id", deleteResidentContact);
 
 export default router;
