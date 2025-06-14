@@ -51,7 +51,6 @@ export const save = async (data) => {
   ];
 
   const result = await con.execute(sql, values);
-  console.log(result);
   return result;
 };
 

@@ -32,7 +32,9 @@ export const getResidentById = async (req, res) => {
 export const createNewResident = async (req, res) => {
   try {
     const resident = await createResident(req.body);
-    res.json(resident);
+    res.json({
+      residentId:resident[0].insertId
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
