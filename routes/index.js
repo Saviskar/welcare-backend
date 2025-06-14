@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.use('/user', UserRoutes);
 
-router.use(authenticate)
+//router.use(authenticate)
 
 router.use('/resident', ResidentRoutes);
 router.use('/residentContact', ResidentContactRoutes);
