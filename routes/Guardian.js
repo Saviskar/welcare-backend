@@ -15,9 +15,9 @@ const router = express.Router();
 
 // Routers
 router.get("/", getGuardians);
-router.post("/create", createNewGuardian);
+router.post("/", createNewGuardian);
 router.get("/:id", getGuardian);
-router.put("/update/:id", updateGuardian);
+router.put("/:id", updateGuardian);
 
 // Export router using ESM
 export default router;
