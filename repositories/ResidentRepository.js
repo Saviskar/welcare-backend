@@ -14,7 +14,9 @@ const sql = `
     postCode VARCHAR(10),
     religion VARCHAR(100),
     countryOfBirth VARCHAR(100),
-    preferredLanguage VARCHAR(100)
+    preferredLanguage VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
   )
 `;
 
